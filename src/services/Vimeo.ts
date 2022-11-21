@@ -1,17 +1,14 @@
 
 import axios from 'axios'
 import AllVideos from './vimeo/AllVideos'
-import { Uploader } from './vimeo/Uploader'
 
 class Vimeo {
   protected apiKey? = process.env.SANITY_STUDIO_VIMEO_TOKEN
   allVideos: AllVideos
-  uploader: Uploader
   protected loadingCallbackFn?: (loading: boolean) => void
 
   constructor() {
     this.allVideos = new AllVideos(this)
-    this.uploader = new Uploader(this)
   }
 
   setApiKey = (apiKey: string) => {

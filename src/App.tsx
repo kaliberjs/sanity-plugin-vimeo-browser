@@ -1,7 +1,6 @@
 import React, {forwardRef, Ref, MouseEvent, useEffect} from 'react'
 import VideoProvider from './contexts/VideoContext'
 import SystemProvider from './contexts/SystemContext'
-import UploadProvider from './contexts/UploadContext'
 import Dashboard from './components/Dashboard'
 import VideoAsset from './types/sanity/VideoAsset'
 import Dialog from 'part:@sanity/components/dialogs/fullscreen'
@@ -37,32 +36,32 @@ const VimeoBrowser: React.FC<VimeoBrowserProps> = forwardRef((props, ref: Ref<HT
     onChange(PatchEvent.from(asset ? set(event) : unset()))
   }
 
+  console.log('tool: ', tool)
+
   return <SystemProvider onFocus={onFocus} onSelect={onSelect} tool={tool}>
       <VideoProvider>
-        <UploadProvider >
-          <ThemeProvider scheme="dark" theme={studioTheme}>
-            <ToastProvider zOffset={60000}>
-              {tool ? 
-                  <Box ref={ref} className="h-full relative">
-                    <Dashboard />
+        <ThemeProvider scheme="dark" theme={studioTheme}>
+          <ToastProvider zOffset={60000}>
+            {tool ? 
+                <Box ref={ref} className="h-full relative">
+                  <Dashboard />
+                </Box>
+              : <Portal>
+                  <Box
+                    onDragEnter={handleStopPropagation}
+                    onDragLeave={handleStopPropagation}
+                    onDragOver={handleStopPropagation}
+                    onDrop={handleStopPropagation}
+                    onMouseUp={handleStopPropagation}
+                    ref={ref}
+                    className="h-auto left-0 fixed top-0 w-full z-800000"
+                  >
+                  <Dashboard />
                   </Box>
-                : <Portal>
-                    <Box
-                      onDragEnter={handleStopPropagation}
-                      onDragLeave={handleStopPropagation}
-                      onDragOver={handleStopPropagation}
-                      onDrop={handleStopPropagation}
-                      onMouseUp={handleStopPropagation}
-                      ref={ref}
-                      className="h-auto left-0 fixed top-0 w-full z-800000"
-                    >
-                    <Dashboard />
-                    </Box>
-                  </Portal>
-              }
-            </ToastProvider>
-          </ThemeProvider>
-        </UploadProvider>
+                </Portal>
+            }
+          </ToastProvider>
+        </ThemeProvider>
       </VideoProvider>
     </SystemProvider>
 })

@@ -1,19 +1,12 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import { VideoContext } from '../contexts/VideoContext';
-import vimeo from '../services/Vimeo';
 import TopBar from './TopBar';
 import VideoBrowser from './VideoBrowser';
 import LoadingSpinner from './common/LoadingSpinner';
-import Uploader from './Uploader';
-import { SystemContext } from '../contexts/SystemContext';
-import MODES from '../types/Modes';
-import { UploadContext } from '../contexts/UploadContext';
 import Sanity from '../services/Sanity';
 
 const Dashboard: React.FC = () => {
     const { loading } = useContext(VideoContext)
-    const { mode } = useContext(SystemContext)
-
     const loadVideos = useCallback(() => {
       Sanity.paginator.getVideos()
     }, [])
@@ -27,11 +20,9 @@ const Dashboard: React.FC = () => {
         <div className="m-auto p-2 max-w-7xl">
         <TopBar />
           { loading ?  <LoadingSpinner /> :
-            mode === MODES.BROWSING ? 
             <div>
               <VideoBrowser />
             </div>
-            : <Uploader />
           }
         </div>
       </div>
