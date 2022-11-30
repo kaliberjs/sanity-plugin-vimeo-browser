@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import { VideoContext } from '../contexts/VideoContext';
-import TopBar from './TopBar';
+import { TopBar } from './TopBar';
 import VideoBrowser from './VideoBrowser';
 import LoadingSpinner from './common/LoadingSpinner';
 import Sanity from '../services/Sanity';

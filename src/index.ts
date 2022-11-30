@@ -4,7 +4,6 @@ import './styles/tailwind.css'
 import Icon from './icon/Icon'
 const setApiKey = Vimeo.setApiKey
 
-
 export { setApiKey }
 
 export default {

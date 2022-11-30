@@ -1,9 +1,7 @@
-import React, {forwardRef, Ref, MouseEvent, useEffect} from 'react'
+import React from 'react'
 import VideoProvider from './contexts/VideoContext'
 import SystemProvider from './contexts/SystemContext'
 import Dashboard from './components/Dashboard'
-import VideoAsset from './types/sanity/VideoAsset'
-import Dialog from 'part:@sanity/components/dialogs/fullscreen'
 import { SanityDocument, SanityAssetDocument, SanityImageAssetDocument } from '@sanity/client'
 import PatchEvent, { set, unset } from '@sanity/form-builder/PatchEvent'
 import {Box, Portal, ThemeProvider, ToastProvider, studioTheme, PortalProvider} from '@sanity/ui'
@@ -14,15 +12,10 @@ interface VimeoBrowserProps {
   onFocus: () => void
   onChange: (event: any) => void
   selectedAssets?: (SanityAssetDocument | SanityImageAssetDocument)[]
-  tool: string
 }
 
-const VimeoBrowser: React.FC<VimeoBrowserProps> = forwardRef((props, ref: Ref<HTMLDivElement>) => {
-  const { onFocus, onChange, tool } = props
-  const handleStopPropagation = (e: MouseEvent) => {
-    e.nativeEvent.stopImmediatePropagation()
-    e.stopPropagation()
-  }
+const VimeoBrowser: React.FC<VimeoBrowserProps> = React.forwardRef((props, ref) => {
+  const { onFocus, onChange } = props
 
   const onSelect = (asset: VideoResponse) => {
     const event = {
@@ -36,34 +29,21 @@ const VimeoBrowser: React.FC<VimeoBrowserProps> = forwardRef((props, ref: Ref<HT
     onChange(PatchEvent.from(asset ? set(event) : unset()))
   }
 
-  console.log('tool: ', tool)
-
-  return <SystemProvider onFocus={onFocus} onSelect={onSelect} tool={tool}>
+  return (
+    <SystemProvider {...{ onFocus, onSelect }}>
       <VideoProvider>
         <ThemeProvider scheme="dark" theme={studioTheme}>
           <ToastProvider zOffset={60000}>
-            {tool ? 
-                <Box ref={ref} className="h-full relative">
-                  <Dashboard />
-                </Box>
-              : <Portal>
-                  <Box
-                    onDragEnter={handleStopPropagation}
-                    onDragLeave={handleStopPropagation}
-                    onDragOver={handleStopPropagation}
-                    onDrop={handleStopPropagation}
-                    onMouseUp={handleStopPropagation}
-                    ref={ref}
-                    className="h-auto left-0 fixed top-0 w-full z-800000"
-                  >
-                  <Dashboard />
-                  </Box>
-                </Portal>
-            }
+            <Portal>
+              <Box {...{ ref }} className="h-auto left-0 fixed top-0 w-full z-800000">
+                <Dashboard />
+              </Box>
+            </Portal>
           </ToastProvider>
         </ThemeProvider>
       </VideoProvider>
     </SystemProvider>
+  )
 })
 
 export default VimeoBrowser

@@ -18,11 +18,10 @@ export const SystemContext = createContext<SystemContextProps>({
 interface SystemProviderProps {
   onFocus: () => void,
   onSelect: (doc: VideoResponse) => void,
-  tool: string
 }
 
-const SystemProvider: React.FC<SystemProviderProps> = ({onSelect, onFocus, tool, children }) => {
-  const [selecting, setSelecting] = useState(!tool)
+const SystemProvider: React.FC<SystemProviderProps> = ({onSelect, onFocus, children }) => {
+  const [selecting, setSelecting] = useState(false)
 
   return (
     <SystemContext.Provider
