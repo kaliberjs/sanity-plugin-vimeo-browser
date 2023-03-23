@@ -1,6 +1,6 @@
 import AllVideosResponse from "../../types/vimeo/AllVideosResponse"
 import VideoResponse from "../../types/vimeo/VideoResponse"
-import Vimeo from "../Vimeo"
+import {Vimeo} from "../Vimeo"
 import File from '../../types/vimeo/File'
 
 class AllVideos {
@@ -19,7 +19,7 @@ class AllVideos {
   getVideos = async(url: string) => {
     const res = await this.vimeo.getUrl(url)
     return this.sanitizeResponse(res)
-  } 
+  }
 
   getFirst = async () => {
     const res = await this.getVideos(this.baseUrl)

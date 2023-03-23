@@ -1,10 +1,10 @@
-import App from '../App'
+import { VimeoBrowser } from '../VimeoBrowser'
 
 export default {
   name: 'vimeo.videoAsset',
   type: 'document',
   title: 'Video asset',
-  inputComponent: App,
+  inputComponent: VimeoBrowser,
   fields: [
     {
       type: 'string',

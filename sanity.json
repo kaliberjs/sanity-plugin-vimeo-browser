@@ -5,32 +5,28 @@
   },
   "parts": [
     {
-      "implements": "part:@sanity/base/tool",
-      "path": "bundle.js"
+      "implements": "part:@sanity/base/schema-type",
+      "path": "./src/schemas/vimeo.picture.size.js"
     },
     {
       "implements": "part:@sanity/base/schema-type",
-      "path": "./lib/schemas/vimeo.picture.size.js"
+      "path": "./src/schemas/vimeo.video.file.js"
     },
     {
       "implements": "part:@sanity/base/schema-type",
-      "path": "./lib/schemas/vimeo.video.file.js"
+      "path": "./src/schemas/vimeo.video.pictures.js"
     },
     {
       "implements": "part:@sanity/base/schema-type",
-      "path": "./lib/schemas/vimeo.video.pictures.js"
+      "path": "./src/schemas/vimeo.video.privacy.js"
     },
     {
       "implements": "part:@sanity/base/schema-type",
-      "path": "./lib/schemas/vimeo.video.privacy.js"
+      "path": "./src/schemas/vimeo.videoAsset.js"
     },
     {
       "implements": "part:@sanity/base/schema-type",
-      "path": "./lib/schemas/vimeo.videoAsset.js"
-    },
-    {
-      "implements": "part:@sanity/base/schema-type",
-      "path": "./lib/schemas/vimeo.video.js"
+      "path": "./src/schemas/vimeo.video.js"
     }
   ]
 }

@@ -2,7 +2,7 @@ import { SanityDocument } from "@sanity/client"
 import VideoAsset from "../../types/sanity/VideoAsset"
 import VideoResponse from "../../types/vimeo/VideoResponse"
 import Sanity from "../Sanity"
-import Vimeo from "../Vimeo"
+import {Vimeo} from "../Vimeo"
 
 export class Syncer {
   sanity: typeof Sanity
@@ -56,7 +56,7 @@ export class Syncer {
     let nextResponse = await Vimeo.allVideos.getFirst()
 
     const promises = []
-    
+
     while (nextResponse && nextResponse.data) {
       let videos = nextResponse.data
       for (const video of videos) {

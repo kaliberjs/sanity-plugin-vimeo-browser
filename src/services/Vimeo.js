@@ -1,27 +1,29 @@
 
 import axios from 'axios'
-import AllVideos from './vimeo/AllVideos'
+import { AllVideos } from './vimeo/AllVideos'
 
-class Vimeo {
-  protected apiKey? = '3a36dec27ecaa444524000bafd41ec28'
-  allVideos: AllVideos
-  protected loadingCallbackFn?: (loading: boolean) => void
+class VimeoClass {
+  apiKey = '3a36dec27ecaa444524000bafd41ec28'
+  allVideos
+  loadingCallbackFn
 
   constructor() {
     this.allVideos = new AllVideos(this)
   }
 
-  setApiKey = (apiKey: string) => {
+  setApiKey(apiKey) {
     this.apiKey = apiKey
   }
 
-  setLoadingCallback = (callbackFn: (loading: boolean) => void) => this.loadingCallbackFn = callbackFn
+  setLoadingCallback(callbackFn) {
+    this.loadingCallbackFn = callbackFn
+  }
 
-  get baseHeader(): { [id: string]: string } {
+  get baseHeader() {
     return { Authorization: `Bearer ${this.apiKey}` }
   }
 
-  getUrl = async (url: string) => {
+  async getUrl(url) {
     if (this.loadingCallbackFn) this.loadingCallbackFn(true)
     const headers = { Authorization: `Bearer ${this.apiKey}` }
 
@@ -36,4 +38,4 @@ class Vimeo {
   }
 }
 
-export default new Vimeo()
+export const Vimeo = new VimeoClass()

@@ -1,27 +1,27 @@
-import postcss from "rollup-plugin-postcss";
+import postcss from 'rollup-plugin-postcss'
 import svgr from '@svgr/rollup'
 
 export default {
-  input: "lib/index.js",
+  input: 'lib/index.js',
   output: {
-    file: "dist/bundle.js",
-    format: "es",
-    name: "sanity-plugin-vimeo-browser",
+    file: 'dist/bundle.js',
+    format: 'cjs',
+    name: 'sanity-plugin-vimeo-browser',
     sourcemap: true,
   },
-  external: ["react", "react-dom"],
+  external: ['react', 'react-dom'],
   plugins: [
     postcss({
       config: {
-        path: "./postcss.config.js",
+        path: './postcss.config.js',
       },
-      extensions: [".css"],
+      extensions: ['.css'],
       minimize: true,
       inject: {
-        insertAt: "top",
+        insertAt: 'top',
       },
     }),
-    svgr()
+    svgr(),
   ]
   /*
   plugins: [
@@ -38,4 +38,4 @@ export default {
     json(),
     commonjs(),
   ]*/
-};
+}

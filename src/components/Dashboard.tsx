@@ -1,11 +1,11 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import { VideoContext } from '../contexts/VideoContext';
 import { TopBar } from './TopBar';
-import VideoBrowser from './VideoBrowser';
+import { VideoBrowser } from './VideoBrowser';
 import { LoadingSpinner } from './common/LoadingSpinner';
 import Sanity from '../services/Sanity';
 
-const Dashboard: React.FC = () => {
+export const Dashboard() => {
     const { loading } = useContext(VideoContext)
     const loadVideos = useCallback(() => {
       Sanity.paginator.getVideos()
@@ -28,5 +28,3 @@ const Dashboard: React.FC = () => {
       </div>
     );
 };
-
-export default Dashboard;
